@@ -1,1 +1,0 @@
-The Current timestamp is Date(2023-7-17), Indian Standard Time(22:19:19)

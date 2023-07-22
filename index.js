@@ -1,48 +1,29 @@
-const mentorRouter = require('./Routers/MentorRouter')
-const studentRouter = require('./Routers/StudentRouter')
-
-const express = require('express');
-const app = express();
-
-const cors = require('cors');
-app.use(cors());  /* To avoid cross origin error */
-
-app.use(express.json());  
-const mongoose = require("mongoose");
-
-
-const dbConnect = async () => {
-  try {
-    await mongoose.connect(
-        "mongodb+srv://rbsthivi:thiveeya@cluster0.vgypaij.mongodb.net/",
-
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        autoIndex: true,
-      }
-    );
-    console.log("DB Connected");
-  } catch (e) {
-    console.log(e.message, "error in connecting db");
-  }
-};
+//Modules and Middlewars
+require('dotenv').config()
+const express=require('express');
+const mongoose=require('mongoose');
+const app=express();
+const cors=require('cors');
+const routes=require('./routes/TodoRoute')
+app.use(cors());
+app.use(express.json());
+app.use(routes); 
 
 
+//atlas url
+const url = process.env.ATLAS_URL|| "mongodb+srv://rbsthivi:thiveeya@cluster0.vgypaij.mongodb.net/?retryWrites=true&w=majority"
+;
 
-app.get('/',(req,res) => res.send(`
-<div>
-<p> In Home Page </p>
-</div>
- `))
-
-app.use('/Mentors',mentorRouter);
-app.use('/Students',studentRouter);
-
-app.listen(process.PORT || 3002, async (err) => {
-    await dbConnect();
-    console.log("Started server ");
-    if (err) {
-      console.log(err, "error in starting server");
-    }
-  });
+//mongodb connect
+mongoose.connect(url)
+    .then(() => {
+        console.log("connected to atlas mongodb");
+    })
+    .catch(err => {
+        console.error(err);
+    })
+    
+const PORT=3001;
+app.listen(PORT,()=>{
+    console.log(`Server connected to PORT ${PORT}`);
+})

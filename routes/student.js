@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { student, mentor } = require("../shared/db");
+const { student } = require("../shared/db");
 
 router.get("/", async (req, res) => {
   console.log("get all Students");
@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       course: req.body.course,
-      mentorAssigned: req.body.mentorAssigned,
+      MentorAssigned: req.body.mentorAssigned,
     });
     res.send(data);
   } catch (e) {

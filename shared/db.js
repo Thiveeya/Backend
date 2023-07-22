@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 const dbConnect = async () => {
   try {
     await mongoose.connect(
-       " mongodb+srv://rbsthivi:thiveeya@cluster0.vgypaij.mongodb.net/",
+      "mongodb+srv://rbsthivi:thiveeya@cluster0.vgypaij.mongodb.net/",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
